@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAULT — Ruang Pribadi Jelan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== NOISE / GRAIN OVERLAY ===================== -->
+<div class="grain"></div>
+
+<!-- ===================== GERBANG SIDIK JARI ===================== -->
+<div class="gate" id="gate">
+  <div class="gate__glow"></div>
+
+  <div class="gate__fox" id="gateFox" aria-hidden="true">
+    <svg viewBox="0 0 200 200" class="fox-svg">
+      <ellipse class="fox-shadow" cx="100" cy="178" rx="46" ry="7"/>
+      <g class="fox-body">
+        <path class="fox-ear fox-ear--l" d="M62 78 L40 24 Q38 16 46 20 L82 54 Z"/>
+        <path class="fox-ear fox-ear--r" d="M138 78 L160 24 Q162 16 154 20 L118 54 Z"/>
+        <path class="fox-ear-inner fox-ear-inner--l" d="M64 70 L52 38 L78 58 Z"/>
+        <path class="fox-ear-inner fox-ear-inner--r" d="M136 70 L148 38 L122 58 Z"/>
+        <path class="fox-head" d="M100 50 C134 50 152 76 148 106 C145 132 126 150 100 150 C74 150 55 132 52 106 C48 76 66 50 100 50 Z"/>
+        <path class="fox-cheek fox-cheek--l" d="M52 106 C48 122 58 138 78 142 L70 112 Z"/>
+        <path class="fox-cheek fox-cheek--r" d="M148 106 C152 122 142 138 122 142 L130 112 Z"/>
+        <g class="fox-eyes" id="foxEyes">
+          <path class="fox-eye fox-eye--l" d="M74 96 Q82 88 92 96 Q82 102 74 96 Z"/>
+          <path class="fox-eye fox-eye--r" d="M126 96 Q118 88 108 96 Q118 102 126 96 Z"/>
+          <circle class="fox-blink fox-blink--l" cx="83" cy="96" r="9"/>
+          <circle class="fox-blink fox-blink--r" cx="117" cy="96" r="9"/>
+        </g>
+        <path class="fox-brow fox-brow--l" d="M72 84 Q82 78 93 84"/>
+        <path class="fox-brow fox-brow--r" d="M128 84 Q118 78 107 84"/>
+        <path class="fox-muzzle" d="M84 108 C84 126 92 138 100 138 C108 138 116 126 116 108 C116 100 108 96 100 96 C92 96 84 100 84 108 Z"/>
+        <path class="fox-nose" d="M100 108 C96 108 93 111 93 114 C93 118 96 120 100 121 C104 120 107 118 107 114 C107 111 104 108 100 108 Z"/>
+        <path class="fox-mouth" id="foxMouth" d="M88 122 Q100 130 112 122"/>
+        <path class="fox-tongue" id="foxTongue" d="M96 124 Q100 132 104 124 Q100 128 96 124 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <p class="gate__eyebrow">Akses Privat</p>
+  <h1 class="gate__title">Sentuh untuk<br>membuka ini</h1>
+
+  <button class="scanner" id="scanner" aria-label="Pindai sidik jari untuk masuk">
+    <svg viewBox="0 0 120 120" class="scanner__ring">
+      <circle cx="60" cy="60" r="54" class="scanner__track"/>
+      <circle cx="60" cy="60" r="54" class="scanner__progress" id="scanProgress"/>
+    </svg>
+    <svg viewBox="0 0 64 64" class="scanner__print">
+      <path d="M32 8c-13.3 0-24 10.7-24 24 0 6 1.2 10.6 2.4 14.4" class="ridge"/>
+      <path d="M32 14c-9.9 0-18 8.1-18 18 0 5.6 1 9.8 2 13" class="ridge"/>
+      <path d="M14 32c0-9.9 8.1-18 18-18s18 8.1 18 18c0 4-.4 7.3-1 10" class="ridge"/>
+      <path d="M20 32c0-6.6 5.4-12 12-12s12 5.4 12 12c0 5-.6 8.6-1.6 11.6" class="ridge"/>
+      <path d="M26 32c0-3.3 2.7-6 6-6s6 2.7 6 6c0 4.4-1 8-2.6 11" class="ridge"/>
+      <path d="M32 26v10" class="ridge"/>
+    </svg>
+    <span class="scanner__scanline" id="scanLine"></span>
+  </button>
+
+  <p class="gate__hint" id="gateHint">Ketuk sensor untuk memindai</p>
+</div>
+
+<!-- ===================== KONTEN UTAMA ===================== -->
+<main class="site" id="site" aria-hidden="true">
+
+  <div class="mascot" id="mascot">
+    <svg viewBox="0 0 120 120" class="mascot-svg">
+      <ellipse class="m-shadow" cx="60" cy="108" rx="28" ry="4"/>
+      <path class="m-tail" id="mTail" d="M84 70 Q112 68 108 40 Q106 24 90 26 Q100 30 98 42 Q96 58 78 62 Z"/>
+      <path class="m-ear m-ear--l" d="M42 30 L30 6 Q29 2 34 4 L54 20 Z"/>
+      <path class="m-ear m-ear--r" d="M78 30 L90 6 Q91 2 86 4 L66 20 Z"/>
+      <path class="m-head" d="M60 18 C80 18 90 32 88 48 C86 62 76 72 60 72 C44 72 34 62 32 48 C30 32 40 18 60 18 Z"/>
+      <g class="m-eyes" id="mEyes">
+        <ellipse class="m-eye m-eye--l" cx="50" cy="44" rx="4" ry="5"/>
+        <ellipse class="m-eye m-eye--r" cx="70" cy="44" rx="4" ry="5"/>
+      </g>
+      <path class="m-muzzle" d="M50 52 C50 62 55 68 60 68 C65 68 70 62 70 52 C70 47 65 45 60 45 C55 45 50 47 50 52 Z"/>
+      <path class="m-mouth" id="mMouth" d="M52 60 Q60 66 68 60"/>
+    </svg>
+    <div class="mascot__bubble" id="mascotBubble">Hai! Aku jagain vault ini 🦊</div>
+  </div>
+
+  <nav class="nav">
+    <span class="nav__logo">Jelan<span class="nav__logo-dot">.</span></span>
+    <div class="nav__links">
+      <a href="#galeri">Galeri</a>
+      <a href="#audio">Suara</a>
+      <a href="#video">Rekaman</a>
+    </div>
+    <span class="nav__status"><i class="dot-live"></i>MBG</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__blob hero__blob--1"></div>
+    <div class="hero__blob hero__blob--2"></div>
+    <span class="hero__sparkle hero__sparkle--1">✦</span>
+    <span class="hero__sparkle hero__sparkle--2">✦</span>
+    <span class="hero__sparkle hero__sparkle--3">✦</span>
+    <p class="hero__eyebrow">Akses MBG · WyG</p>
+    <h1 class="hero__title">
+      Ruang miliku,<br>
+      <span class="hero__title-accent">tersimpan rapi.</span>
+    </h1>
+    <p class="hero__sub">Setiap foto, nada, dan rekaman di sini disusun dengan hati‑hati sebuah koleksi personal yang hanya bisa dibuka dengan sentuhanmu sendiri.</p>
+    <a href="#galeri" class="hero__cta">
+      <span>Masuk lebih dalam</span>
+      <svg viewBox="0 0 24 24" class="hero__cta-arrow"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <!-- GALERI -->
+  <section class="gallery" id="galeri">
+    <div class="section-head">
+      <p class="section-head__eyebrow">Koleksi Visual</p>
+      <h2 class="section-head__title">Galeri Foto</h2>
+      <p class="section-head__desc">Ini adalah Foto Foto  <code>MyKisah </code> Wyng.</p>
+    </div>
+    <div class="gallery__grid" id="galleryGrid">
+      <!-- diisi via JS dari daftar foto -->
+    </div>
+  </section>
+
+  <!-- AUDIO -->
+  <section class="audio" id="audio">
+    <div class="section-head">
+      <p class="section-head__eyebrow">Koleksi Lagu kesukaan dia</p>
+      <h2 class="section-head__title">Song &amp; Bvss</h2>
+      <p class="section-head__desc">Lagu kesukaan MBG <code>music</code>.</p>
+    </div>
+    <div class="player" id="player">
+      <div class="player__art" id="playerArt">
+        <svg viewBox="0 0 100 100" class="vinyl" id="vinyl">
+          <circle cx="50" cy="50" r="46" class="vinyl__disc"/>
+          <circle cx="50" cy="50" r="46" class="vinyl__groove"/>
+          <circle cx="50" cy="50" r="16" class="vinyl__label"/>
+          <circle cx="50" cy="50" r="3" class="vinyl__hole"/>
+        </svg>
+      </div>
+      <div class="player__body">
+        <p class="player__track" id="trackName">Belum ada trek dipilih</p>
+        <p class="player__artist" id="trackArtist">Tambahkan berkas ke /music</p>
+        <div class="player__bars" id="playerBars">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="player__controls">
+          <button class="player__btn player__btn--prev" id="btnPrev" aria-label="Sebelumnya">
+            <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM7 4v16H5V4h2z"/></svg>
+          </button>
+          <button class="player__btn player__btn--play" id="btnPlay" aria-label="Putar">
+            <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="player__btn player__btn--next" id="btnNext" aria-label="Berikutnya">
+            <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zm12 0v16h2V4h-2z"/></svg>
+          </button>
+        </div>
+        <div class="player__seek">
+          <span class="player__time" id="timeCurrent">0:00</span>
+          <div class="player__track-bar" id="seekBar"><div class="player__track-fill" id="seekFill"></div></div>
+          <span class="player__time" id="timeTotal">0:00</span>
+        </div>
+      </div>
+    </div>
+    <audio id="audioEl" preload="metadata"></audio>
+    <ul class="playlist" id="playlist"></ul>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="videos" id="video">
+    <div class="section-head">
+      <p class="section-head__eyebrow">Koleksi Bergerak</p>
+      <h2 class="section-head__title">Rekaman Video</h2>
+      <p class="section-head__desc">Oh Shit betapa cantiknya pacarku <code>video</code>.</p>
+    </div>
+    <div class="video-grid" id="videoGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <p>VAULT — Web ini adalah dibuat oleh jelan . 🦊</p>
+  </footer>
+
+</main>
+
+<!-- Lightbox foto -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Tutup">&times;</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
